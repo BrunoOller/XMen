@@ -1,6 +1,5 @@
-// JavaScript
-
 const personagens = document.querySelectorAll('.personagem');
+
 
 personagens.forEach((personagem) => {
     personagem.addEventListener('mouseenter', () => {
@@ -9,24 +8,34 @@ personagens.forEach((personagem) => {
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        personagem.classList.add('selecionado');
-        
         removerSelecaoDoPersonagem();
 
         personagem.classList.add('selecionado');
 
-        const imagemPersonagemGrande = document.querySelector('.personagem-grande');
-        
-        const idPersonagem = personagem.attributes.id.value;
-        imagemPersonagemGrande.src = `./src/imagens/card-${idPersonagem}.png`;
+        alterarImagemPersonagemSelecionado(personagem);
 
-        const nomePersonagem = document.getElementById('nome-personagem');
-        nomePersonagem.innerText = personagem.getAttribute('data-name');
+        alterarNomePersonagemSelecionado(personagem);
 
-        const descricaoPersonagem = document.getElementById('descricao-personagem');
-        descricaoPersonagem.innerText = personagem.getAttribute('data-description');
+        alterarDescricaoPersonagem(personagem);
     })
 })
+
+function alterarDescricaoPersonagem(personagem) {
+    const descricaoPersonagem = document.getElementById('descricao-personagem');
+    descricaoPersonagem.innerText = personagem.getAttribute('data-description');
+}
+
+function alterarNomePersonagemSelecionado(personagem) {
+    const nomePersonagem = document.getElementById('nome-personagem');
+    nomePersonagem.innerText = personagem.getAttribute('data-name');
+}
+
+function alterarImagemPersonagemSelecionado(personagem) {
+    const imagemPersonagemGrande = document.querySelector('.personagem-grande');
+    // passo 2 - alterar a imagem do personagem grande
+    const idPersonagem = personagem.attributes.id.value;
+    imagemPersonagemGrande.src = `./src/imagens/card-${idPersonagem}.png`;
+}
 
 function removerSelecaoDoPersonagem() {
     const personagemSelecionado = document.querySelector('.selecionado');
